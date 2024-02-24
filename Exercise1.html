@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Текстовый редактор</title>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff7e6; 
+    margin: 0;
+  }
+  #text, #editBlock {
+    display: none; 
+    background-color: #ffffe0; 
+    color: #333; 
+    font-size: 16px;
+    border: 1px solid #ffd700; 
+    border-radius: 5px;
+    padding: 10px;
+    width: 60%; 
+    min-height: 150px; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+    outline: none; 
+  }
+  #text { display: block; }
+  </style>
+</head>
+<body>
+
+<div id="text">Одна из самых популярных книг прошлого века — это «как завоевывать друзей и оказывать влияние на людей» Дейла Карнеги. Её цитируют и пересказывают по сей день, однако есть в этой книге важная история, которую оставляют без внимания. 
+
+    История о том, как в начале 00-х годов прошлого века, Карнеги взял на работу Чарльза Шваба и платил ему миллион долларов в год. На секундочку: это то время, когда человек, зарабатывающий 200 долларов в месяц, считался состоятельным.
+    
+    Чарльз был относительно молодым для должности первого президента огромной сталелитейной компании, всего 38 лет. При этом он не был гением. 
+    
+    Он знал много о производстве, но были и те, кто знал в разы больше. Он не знал сильно больше других о финансах и про оптимизацию производственных процессов. Был довольно обычным сотрудником: ни плохим, ни гением. Но также в нём была и примечательная изюминка.
+    
+    Чарльз Шваб обладал феноменальной способностью общаться с людьми. Он нравился и сотрудникам в том числе. Причем всем: от дворников до топ-менеджеров. Называл их по имени и общался уважительно с каждым, хвалил, мотивировал.
+    </div>
+<textarea id="editBlock"></textarea>
+
+<script>
+document.addEventListener('keydown', function(event) {
+  if (event.ctrlKey && event.key === 'e') {
+    event.preventDefault(); 
+    if (document.getElementById('text').style.display !== 'none') {
+      Edit(true);
+    }
+  }
+  
+  if (event.ctrlKey && event.key === 's') {
+    event.preventDefault(); 
+    if (document.getElementById('editBlock').style.display !== 'none') {
+      Edit(false);
+    }
+  }
+});
+
+function Edit(edit) {
+  var text = document.getElementById('text');
+  var editBlock = document.getElementById('editBlock');
+  
+  if (edit) {
+    editBlock.value = text.innerText;
+    text.style.display = 'none';
+    editBlock.style.display = 'block';
+    editBlock.focus(); 
+  } else {
+    text.innerText = editBlock.value; 
+    editBlock.style.display = 'none';
+    text.style.display = 'block';
+  }
+}
+</script>
+
+</body>
+</html>

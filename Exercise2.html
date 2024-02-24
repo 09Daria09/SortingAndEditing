@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Сортируемая таблица</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fffbeb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  table {
+    border-collapse: collapse;
+    width: 50%;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  th {
+    background-color: #ffffe0;
+    cursor: pointer;
+  }
+  th:hover {
+    background-color: #ffffd7;
+  }
+  tr:nth-child(even) {
+    background-color: #fffff0;
+  }
+</style>
+</head>
+<body>
+
+<table id="myTable">
+  <thead>
+    <tr>
+        <th id="headerFirstname">Firstname</th>
+        <th id="headerLastname">Lastname</th>
+        <th id="headerAge">Age</th>
+        <th id="headerCompany">Company</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mark</td>
+      <td>Zuckerberg</td>
+      <td>34</td>
+      <td>Facebook</td>
+    </tr>
+    <tr>
+      <td>Larry</td>
+      <td>Page</td>
+      <td>45</td>
+      <td>Google</td>
+    </tr>
+    <tr>
+      <td>Timothy</td>
+      <td>Cook</td>
+      <td>57</td>
+      <td>Apple</td>
+    </tr>
+    <tr>
+      <td>Bill</td>
+      <td>Gates</td>
+      <td>62</td>
+      <td>Microsoft</td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+
+document.getElementById('headerFirstname').addEventListener('click', function() {
+    sort(0);
+  });
+  document.getElementById('headerLastname').addEventListener('click', function() {
+    sort(1);
+  });
+  document.getElementById('headerAge').addEventListener('click', function() {
+    sort(2);
+  });
+  document.getElementById('headerCompany').addEventListener('click', function() {
+    sort(3);
+  });
+
+  function sort(colIndex) {
+  var table = document.getElementById("myTable");
+  var rows, i, x, y, choice;
+  var isChoice = true;
+
+  while (isChoice) {
+    isChoice = false;
+    rows = table.getElementsByTagName("TR");
+
+    for (i = 1; i < (rows.length - 1); i++) {
+      choice = false;
+
+      x = rows[i].getElementsByTagName("TD")[colIndex];
+      y = rows[i + 1].getElementsByTagName("TD")[colIndex];
+
+      if (colIndex == 2) {
+        if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+          choice = true;
+          break;
+        }
+      } else { 
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          choice = true;
+          break;
+        }
+      }
+    }
+    if (choice) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      isChoice = true;
+    }
+  }
+}
+
+</script>
+
+</body>
+</html>
